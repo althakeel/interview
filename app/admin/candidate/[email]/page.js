@@ -13,6 +13,16 @@ export default function CandidateSheetPage() {
   );
 }
 
+function scoreNote(candidate, scores) {
+  if (scores?.rating) return scores.rating;
+  if (!candidate?.startedAt) return "This candidate has not started the exam.";
+  if (!candidate.answered && !candidate.submittedAt) {
+    return "No answers have been saved yet, so OpenAI has nothing to score.";
+  }
+  if (!candidate.submittedAt) return "OpenAI checks saved answers about once a minute.";
+  return "Submitted. OpenAI is scoring this paper.";
+}
+
 function CandidateSheet() {
   const params = useParams();
   const search = useSearchParams();
@@ -69,14 +79,7 @@ function CandidateSheet() {
   }
 
   return (
-    <AdminFrame
-      title={data?.candidate?.name || "Answer sheet"}
-      extra={data?.candidate?.submittedAt ? (
-        <button className="copper no-print" type="button" onClick={grade} disabled={scoring}>
-          {scoring ? "Scoring with OpenAI…" : scores ? "Score again" : "Score with OpenAI"}
-        </button>
-      ) : null}
-    >
+    <AdminFrame title={data?.candidate?.name || "Answer sheet"}>
       {error ? <p className="alert">{error}</p> : null}
       {!data ? <p>Loading the answer sheet…</p> : null}
       {data ? (
@@ -93,11 +96,14 @@ function CandidateSheet() {
                 {scores ? oneDecimal(scores.finalMark) : "–"}
                 <small> / 100</small>
               </p>
-              <p>{scores ? scores.rating : "Submit the paper, then score it against the model answers."}</p>
+              <p>{scoreNote(data.candidate, scores)}</p>
               <p>
-                Signed in {formatWhen(data.candidate.lastLoginAt)}
+                Registered {formatWhen(data.candidate.lastLoginAt)}
                 {data.candidate.submittedAt ? ` · Submitted ${formatWhen(data.candidate.submittedAt)}` : ""}
               </p>
+              <button className="score-check no-print" type="button" onClick={grade} disabled={scoring}>
+                {scoring ? "Checking score…" : "Check score"}
+              </button>
             </div>
             <div>
               {(scores?.sections || []).map((section) => (

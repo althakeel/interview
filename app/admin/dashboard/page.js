@@ -16,6 +16,8 @@ export default function DashboardPage() {
   const [now, setNow] = useState(Date.now());
   const [offset, setOffset] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const [times, setTimes] = useState({});
+  const [savingTime, setSavingTime] = useState(false);
 
   async function load() {
     const response = await fetch("/api/admin/overview");
@@ -30,6 +32,13 @@ export default function DashboardPage() {
     }
     setOffset(body.serverNow - Date.now());
     setData(body);
+    setTimes((current) => {
+      const next = { ...current };
+      for (const role of body.roles || []) {
+        if (next[role.id] === undefined) next[role.id] = role.minutes;
+      }
+      return next;
+    });
   }
 
   useEffect(() => {
@@ -65,6 +74,29 @@ export default function DashboardPage() {
     return data?.roles?.find((role) => role.id === row.role)?.questionCount || 0;
   }
 
+  async function saveTimes(event) {
+    event.preventDefault();
+    setSavingTime(true);
+    setError("");
+    setNotice("");
+    try {
+      const response = await fetch("/api/admin/durations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ minutes: times }),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error || "Could not save the exam times.");
+      setTimes(body.minutes || {});
+      setNotice("Exam times saved. The countdown uses these minutes for both positions.");
+      await load();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSavingTime(false);
+    }
+  }
+
   async function upload(event) {
     event.preventDefault();
     setUploading(true);
@@ -98,20 +130,54 @@ export default function DashboardPage() {
 
       {data ? (
         <section className="dash-stats">
-          <Stat value={data.counts.loggedIn} label="Signed in" hint="Name and email on file" />
+          <Stat value={data.counts.loggedIn} label="Registered" hint="Name and email entered" />
           <Stat value={data.counts.inExam} label="In the exam" hint="Clock still running" />
           <Stat value={data.counts.submitted} label="Submitted" hint="Paper received" />
           <Stat value={data.counts.graded} label="Scored" hint="OpenAI mark ready" />
         </section>
       ) : null}
 
+      <section className="time-panel">
+        <div>
+          <h2>Exam time</h2>
+          <p className="sub">Choose the countdown for each position. A change updates anyone still in that exam.</p>
+        </div>
+        <form className="time-form" onSubmit={saveTimes}>
+          {(data?.roles || []).map((role) => (
+            <label key={role.id}>
+              <span>{role.short}</span>
+              <input
+                type="number"
+                min={5}
+                max={240}
+                step={1}
+                required
+                aria-label={`${role.short} minutes`}
+                value={times[role.id] ?? role.minutes}
+                onChange={(event) => setTimes((current) => ({ ...current, [role.id]: event.target.value }))}
+              />
+              <em>minutes</em>
+            </label>
+          ))}
+          <button className="primary" type="submit" disabled={savingTime || !data}>
+            {savingTime ? "Saving…" : "Save times"}
+          </button>
+        </form>
+      </section>
+
       <section className="dash-toolbar">
-        <input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search name or email"
-          aria-label="Search name or email"
-        />
+        <label className="dash-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6" />
+            <path d="M16 16l4 4" />
+          </svg>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search name or email"
+            aria-label="Search name or email"
+          />
+        </label>
         <div className="chips" role="tablist" aria-label="Filter by position">
           <button type="button" className={roleFilter === "All" ? "chip on" : "chip"} onClick={() => setRoleFilter("All")}>
             All positions
@@ -128,7 +194,7 @@ export default function DashboardPage() {
           ))}
         </div>
         <div className="chips" role="tablist" aria-label="Filter candidates">
-          {["All", "Logged in", "In exam", "Submitted", "Graded"].map((item) => (
+          {["All", "Not started", "In exam", "Submitted", "Graded"].map((item) => (
             <button
               key={item}
               type="button"
@@ -161,7 +227,7 @@ export default function DashboardPage() {
                   ? `${formatDuration(left)} left`
                   : row.submittedAt
                     ? `Submitted ${formatWhen(row.submittedAt)}`
-                    : `Signed in ${formatWhen(row.lastLoginAt)}`}
+                    : `Registered ${formatWhen(row.lastLoginAt)}`}
               </p>
               <div className="person-foot">
                 <span>{row.answered} of {total} answered</span>

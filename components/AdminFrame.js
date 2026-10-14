@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Logo } from "@/components/Logo";
 
 const LINKS = [
   { href: "/admin/dashboard", label: "Candidates" },
@@ -47,11 +48,8 @@ export function AdminFrame({ title, extra, children }) {
     <div className="panel-shell">
       <aside className="panel-side">
         <a className="side-brand" href="/admin/dashboard">
-          <span className="brand-mark">AT</span>
-          <span>
-            <strong>Althakeel Interview</strong>
-            <small>Interview panel</small>
-          </span>
+          <Logo />
+          <small>Interview panel</small>
         </a>
         <nav className="side-nav">
           {LINKS.map((link) => (

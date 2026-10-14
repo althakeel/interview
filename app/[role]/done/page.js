@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { formatWhen } from "@/lib/format";
+import { Logo } from "@/components/Logo";
 
 export default function DonePage() {
   const router = useRouter();
@@ -36,17 +37,31 @@ export default function DonePage() {
   if (!candidate) return <p className="center">Saving your submission…</p>;
 
   return (
-    <main className="panel-light">
-      <div className="card">
-        <div className="brand-mark">{role === "brand" ? "BA" : "GM"}</div>
-        <h2>Examination submitted</h2>
-        <div className="identity">
-          <p><span>Name</span> {candidate.name || "Not given"}</p>
-          <p><span>Email</span> {candidate.email}</p>
+    <main className="done-page">
+      <section className="done-dark">
+        <Logo />
+        <p className="kicker">Althakeel Interview</p>
+        <h1>Paper received</h1>
+        <p className="lede">The interview panel has your answer sheet. You can close this page.</p>
+      </section>
+      <section className="done-light">
+        <div className="done-card">
+          <p className="done-status">Submitted</p>
+          <h2>{candidate.name || "Candidate"}</h2>
+          <p className="done-email">{candidate.email}</p>
+          <dl>
+            <div>
+              <dt>Finished</dt>
+              <dd>{formatWhen(candidate.submittedAt)}</dd>
+            </div>
+            <div>
+              <dt>Position</dt>
+              <dd>{candidate.roleTitle || "Interview"}</dd>
+            </div>
+          </dl>
+          <button className="primary" type="button" onClick={logout}>Close</button>
         </div>
-        <p className="sub">Finished at {formatWhen(candidate.submittedAt)}. The interview panel will review the answer sheet.</p>
-        <button className="ghost" type="button" onClick={logout}>Close</button>
-      </div>
+      </section>
     </main>
   );
 }

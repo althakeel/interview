@@ -21,7 +21,7 @@ export async function POST(request) {
   const candidates = await candidatesCollection();
   const existing = await findCandidate(session.email, exam);
   if (!existing?.startedAt) return bad("Start the examination before submitting.");
-  if (existing.submittedAt) return json({ candidate: presentCandidate(existing) });
+  if (existing.submittedAt) return json({ candidate: await presentCandidate(existing) });
 
   const now = new Date();
   await candidates.updateOne(
@@ -30,5 +30,5 @@ export async function POST(request) {
   );
   const candidate = await findCandidate(session.email, exam);
   queueScore(session.email, exam);
-  return json({ candidate: presentCandidate(candidate) });
+  return json({ candidate: await presentCandidate(candidate) });
 }

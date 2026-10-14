@@ -44,7 +44,7 @@ export async function GET(request, { params }) {
   });
 
   return json({
-    candidate: presentCandidate(candidate),
+    candidate: await presentCandidate(candidate),
     scores: candidate.scores || null,
     sheet,
   });

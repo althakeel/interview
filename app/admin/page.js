@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Logo } from "@/components/Logo";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -39,25 +40,21 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="split">
-      <section className="panel-dark">
-        <div>
-          <div className="brand-mark">AT</div>
-          <p className="kicker">Althakeel Interview</p>
-          <h1>Candidate dashboard</h1>
-          <p className="lede">
-            See who has signed in, open each answer sheet, and compare final marks for every position.
-          </p>
-        </div>
-        <p className="fine">Candidate entrance stays on the home page.</p>
+    <main className="panel-sign">
+      <section className="panel-sign-dark">
+        <Logo />
+        <p className="kicker">Interview panel</p>
+        <h1>Candidate dashboard</h1>
+        <p className="lede">
+          See who has registered, open each answer sheet, and compare final marks for every position.
+        </p>
       </section>
-      <section className="panel-light">
-        <form className="card stack" onSubmit={login}>
-          <h2>Panel sign in</h2>
-          <p className="sub">Static username and password for the interview panel.</p>
+      <section className="panel-sign-form">
+        <form className="stack" onSubmit={login}>
+          <h2>Sign in</h2>
           <div>
             <label htmlFor="username">Username</label>
-            <input id="username" value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" required />
+            <input id="username" type="text" value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" required />
           </div>
           <div>
             <label htmlFor="password">Password</label>
@@ -81,10 +78,8 @@ export default function AdminLoginPage() {
             </div>
           </div>
           {error ? <p className="alert">{error}</p> : null}
-          <div className="actions">
-            <button className="primary" type="submit" disabled={busy}>{busy ? "Signing in…" : "Enter dashboard"}</button>
-            <a className="ghost" href="/">Candidate entrance</a>
-          </div>
+          <button className="primary" type="submit" disabled={busy}>{busy ? "Signing in…" : "Enter dashboard"}</button>
+          <a className="panel-sign-link" href="/">Candidate entrance</a>
         </form>
       </section>
     </main>

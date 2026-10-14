@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { answerText, formatDuration } from "@/lib/format";
+import { Logo } from "@/components/Logo";
 
 const SHORT_SECTIONS = {
   A: "Leadership",
@@ -188,7 +189,7 @@ export default function ExamPage() {
     <div className="exam-shell">
       <header className="exam-top">
         <div className="exam-brand">
-          <div className="brand-mark">{role === "brand" ? "BA" : "GM"}</div>
+          <Logo className="compact" />
           <div>
             <strong>{pack.candidate.name || "Candidate"}</strong>
             <small>{pack.candidate.email}</small>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MARK_SCHEME } from "@/lib/scheme";
+import { Logo } from "@/components/Logo";
 
 export function CandidateGate({ role }) {
   const router = useRouter();
@@ -11,6 +12,7 @@ export function CandidateGate({ role }) {
   const [session, setSession] = useState(undefined);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [minutes, setMinutes] = useState(role.minutes);
   const examPath = `/${role.id}/exam`;
   const donePath = `/${role.id}/done`;
 
@@ -35,6 +37,16 @@ export function CandidateGate({ role }) {
       ignore = true;
     };
   }, [router, role.id, examPath, donePath]);
+
+  useEffect(() => {
+    fetch("/api/roles")
+      .then((response) => response.json())
+      .then((data) => {
+        const match = data.roles?.find((item) => item.id === role.id);
+        if (match?.minutes) setMinutes(match.minutes);
+      })
+      .catch(() => {});
+  }, [role.id]);
 
   async function login(event) {
     event.preventDefault();
@@ -83,8 +95,8 @@ export function CandidateGate({ role }) {
   if (session === undefined) return <p className="center">Opening the examination…</p>;
 
   const signedIn = session.candidate;
-  const hours = Math.floor(role.minutes / 60);
-  const mins = role.minutes % 60;
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
   const clock = `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}:00`;
   const outline = role.id === "gm"
     ? MARK_SCHEME.map((section) => ({
@@ -101,7 +113,7 @@ export function CandidateGate({ role }) {
     <main className="split">
       <section className="panel-dark">
         <div>
-          <div className="brand-mark">{role.id === "gm" ? "GM" : "BA"}</div>
+          <Logo />
           <p className="kicker">Althakeel Interview</p>
           <h1>{role.title}</h1>
           <p className="lede">{role.summary}</p>
@@ -120,11 +132,6 @@ export function CandidateGate({ role }) {
             </div>
           </div>
         </div>
-        <p className="fine">
-          Answers stay with the interview panel. The countdown continues if you refresh the page.
-          {" "}
-          <a href="/">Choose another position</a>
-        </p>
       </section>
       <section className="panel-light">
         <div className="card">
@@ -136,7 +143,7 @@ export function CandidateGate({ role }) {
                 <p><span>Email</span> {session.candidate.email}</p>
               </div>
               <p className="sub">
-                Press Start and the {role.minutes}-minute clock begins. It cannot be paused.
+                Press Start and the {minutes}-minute clock begins. It cannot be paused.
               </p>
               <ul className="section-list">
                 {outline.map((section) => (
@@ -190,7 +197,6 @@ export function CandidateGate({ role }) {
               <button className="primary" type="submit" disabled={busy}>
                 {busy ? "Signing in…" : "Continue"}
               </button>
-              <a className="ghost" href="/">Back to positions</a>
             </form>
           )}
         </div>

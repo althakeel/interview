@@ -1,7 +1,7 @@
 import { json, bad } from "@/lib/http";
 import { getCandidateSession } from "@/lib/auth";
 import { candidateFilter, candidatesCollection, findCandidate, sanitizeAnswers } from "@/lib/candidates";
-import { durationFor } from "@/lib/roles";
+import { durationMsFor } from "@/lib/settings";
 import { queueScore } from "@/lib/autoscore";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +19,7 @@ export async function POST(request) {
   if (existing.submittedAt) return bad("This examination has already been submitted.");
 
   const elapsed = Date.now() - new Date(existing.startedAt).getTime();
-  if (elapsed > durationFor(exam) + 5000) {
+  if (elapsed > (await durationMsFor(exam)) + 5000) {
     await candidates.updateOne(
       candidateFilter(existing),
       { $set: { answers, submittedAt: new Date(), updatedAt: new Date() } }

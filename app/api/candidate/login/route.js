@@ -4,6 +4,7 @@ import {
   candidateFilter,
   candidateId,
   candidatesCollection,
+  findCandidate,
   isValidEmail,
   isValidName,
   nameKey,
@@ -29,12 +30,9 @@ export async function POST(request) {
     await ensureQuestionBank(role);
     const candidates = await candidatesCollection();
     const key = nameKey(name);
-    const existing = await candidates.find({}).toArray();
-    const inRole = (candidate) => (candidate.role || "gm") === role;
-    const sameEmail = existing.find((candidate) => candidate.email === email && inRole(candidate));
-    const sameName = existing.find(
-      (candidate) => candidate.nameKey === key && candidate.email !== email && inRole(candidate)
-    );
+    const sameEmail = await findCandidate(email, role);
+    const named = await candidates.find({ nameKey: key }).toArray();
+    const sameName = named.find((candidate) => (candidate.role || "gm") === role && candidate.email !== email);
 
     if (sameName) {
       return bad("This name is already registered for this position. Each candidate can sign in only once.");
@@ -59,8 +57,8 @@ export async function POST(request) {
       },
       { upsert: true }
     );
-    const candidate = (await candidates.find({}).toArray()).find((item) => item.id === id);
-    const response = json({ candidate: presentCandidate(candidate) });
+    const candidate = await findCandidate(email, role);
+    const response = json({ candidate: await presentCandidate(candidate) });
     return applyCandidateCookie(response, email, role);
   } catch (error) {
     return bad(databaseError(error), 500);

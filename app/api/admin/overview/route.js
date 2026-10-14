@@ -5,6 +5,7 @@ import { ensureQuestionBank } from "@/lib/bank";
 import { storageMode } from "@/lib/mongodb";
 import { readScoreStatus } from "@/lib/autoscore";
 import { listRoles } from "@/lib/roles";
+import { getExamMinutes } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,7 @@ export async function GET() {
   if (!session) return bad("Admin sign-in required.", 401);
 
   const roles = listRoles();
+  const minutes = await getExamMinutes();
   const [candidates, banks] = await Promise.all([
     candidatesCollection().then((collection) =>
       collection.find({}).sort({ lastLoginAt: -1 }).toArray()
@@ -23,7 +25,7 @@ export async function GET() {
         id: role.id,
         title: role.title,
         short: role.short,
-        minutes: role.minutes,
+        minutes: minutes[role.id] || role.minutes,
         questionCount: bank.questions.length,
         keySource: bank.source,
         keyUpdatedAt: bank.updatedAt,
@@ -31,7 +33,7 @@ export async function GET() {
     })),
   ]);
 
-  const rows = candidates.map(presentCandidate);
+  const rows = await Promise.all(candidates.map((candidate) => presentCandidate(candidate, minutes)));
   return json({
     serverNow: Date.now(),
     storage: storageMode(),

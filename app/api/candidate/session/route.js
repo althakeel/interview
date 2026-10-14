@@ -3,7 +3,8 @@ import { clearCookie, cookiesNames, getCandidateSession } from "@/lib/auth";
 import { findCandidate, presentCandidate } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
 import { publicQuestion } from "@/lib/scheme";
-import { durationFor, getRole } from "@/lib/roles";
+import { getRole } from "@/lib/roles";
+import { durationMsFor } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -23,9 +24,9 @@ export async function GET(request) {
   const bank = await ensureQuestionBank(exam);
   const inProgress = Boolean(candidate.startedAt) && !candidate.submittedAt;
   return json({
-    candidate: presentCandidate(candidate),
+    candidate: await presentCandidate(candidate),
     serverNow: Date.now(),
-    durationMs: durationFor(exam),
+    durationMs: await durationMsFor(exam),
     questionCount: bank.questions.length,
     questions: inProgress ? bank.questions.map(publicQuestion) : [],
     answers: inProgress ? candidate.answers || {} : {},
