@@ -1,0 +1,637 @@
+[
+  {
+    "id": 1,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A premium skincare brand has strong sales in Europe but no UAE presence. What is the best first step before approaching it?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Promise a nationwide launch"
+      },
+      {
+        "key": "B",
+        "text": "Assess UAE demand, competition, pricing and channel fit"
+      },
+      {
+        "key": "C",
+        "text": "Request an exclusivity contract immediately"
+      },
+      {
+        "key": "D",
+        "text": "Estimate revenue from European sales alone"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 2,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "You find a brand that says it is 'open to international expansion.' Who is the best initial contact?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Any retail store employee"
+      },
+      {
+        "key": "B",
+        "text": "Its social media followers"
+      },
+      {
+        "key": "C",
+        "text": "The founder or international partnerships decision-maker"
+      },
+      {
+        "key": "D",
+        "text": "A logistics provider that handles its shipments"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 3,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which combination makes an exclusivity clause commercially clear?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Territory, covered products, channels, duration and performance conditions"
+      },
+      {
+        "key": "B",
+        "text": "A verbal promise and a launch date"
+      },
+      {
+        "key": "C",
+        "text": "A brand logo and a marketing budget"
+      },
+      {
+        "key": "D",
+        "text": "A product catalogue and an email introduction"
+      }
+    ],
+    "correct": "A",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: A. "
+  },
+  {
+    "id": 4,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A brand asks for a large minimum annual purchase before sharing its UAE sales data. What is the strongest response?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Accept to secure the opportunity"
+      },
+      {
+        "key": "B",
+        "text": "Refuse all minimum commitments"
+      },
+      {
+        "key": "C",
+        "text": "Ask for evidence and propose phased, measurable commitments"
+      },
+      {
+        "key": "D",
+        "text": "Replace the minimum with a higher royalty"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 5,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A product sells to a retailer for AED 70 and its landed cost is AED 42. What is the distributor's gross margin percentage on that sale?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "28%"
+      },
+      {
+        "key": "B",
+        "text": "40%"
+      },
+      {
+        "key": "C",
+        "text": "60%"
+      },
+      {
+        "key": "D",
+        "text": "67%"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 6,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which evidence is most useful when deciding whether a new food brand can enter the UAE successfully?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "The founder's personal confidence"
+      },
+      {
+        "key": "B",
+        "text": "A competitor's social media follower count alone"
+      },
+      {
+        "key": "C",
+        "text": "A sales forecast with no channel assumptions"
+      },
+      {
+        "key": "D",
+        "text": "Category demand, target customers, price points, compliance and route to market ==== PAGE ==== International Brand Acquisition | Candidate assessment Page 2"
+      }
+    ],
+    "correct": "D",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: D. "
+  },
+  {
+    "id": 7,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which issue belongs in initial due diligence on a prospective brand?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Whether the founder likes Dubai"
+      },
+      {
+        "key": "B",
+        "text": "Ownership of brand rights, product compliance, supply capacity and financial health"
+      },
+      {
+        "key": "C",
+        "text": "Only the brand's packaging colours"
+      },
+      {
+        "key": "D",
+        "text": "Only its overseas advertising budget"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 8,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "What is the main commercial difference between an exclusive distributor and a master franchisee?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "There is no difference"
+      },
+      {
+        "key": "B",
+        "text": "A distributor must own the brand's trademark"
+      },
+      {
+        "key": "C",
+        "text": "A franchisee usually operates or grants a defined business format; a distributor buys and resells products"
+      },
+      {
+        "key": "D",
+        "text": "A distributor always pays royalties and a franchisee never does"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 9,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Your pipeline has 40 brands. Which prospect should be prioritized for a meeting?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "The most famous brand, regardless of availability"
+      },
+      {
+        "key": "B",
+        "text": "A brand with strong fit, available rights, a reachable decision-maker and workable economics"
+      },
+      {
+        "key": "C",
+        "text": "The brand with the cheapest samples"
+      },
+      {
+        "key": "D",
+        "text": "The brand that replied first"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 10,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A brand will offer exclusivity only after you prove demand. Which proposal best balances both sides?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "A time-limited pilot with agreed milestones and a defined path to exclusivity"
+      },
+      {
+        "key": "B",
+        "text": "An unlimited non-exclusive agreement with no review"
+      },
+      {
+        "key": "C",
+        "text": "A promise of sales without a plan"
+      },
+      {
+        "key": "D",
+        "text": "Immediate exclusivity with no targets"
+      }
+    ],
+    "correct": "A",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: A. "
+  },
+  {
+    "id": 11,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A brand says another company is already selling its products in the UAE. What should you establish first?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Assume the other seller is unauthorized"
+      },
+      {
+        "key": "B",
+        "text": "Offer to undercut the seller"
+      },
+      {
+        "key": "C",
+        "text": "Ignore the seller because exclusivity is possible anyway"
+      },
+      {
+        "key": "D",
+        "text": "Verify the existing seller's contract, territory, channels, term and termination rights"
+      }
+    ],
+    "correct": "D",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: D. "
+  },
+  {
+    "id": 12,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "When selecting a product for UAE launch, what is the best way to handle regulatory uncertainty?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Ship inventory first and check later"
+      },
+      {
+        "key": "B",
+        "text": "Confirm applicable product and import requirements with qualified local specialists before committing"
+      },
+      {
+        "key": "C",
+        "text": "Rely on approval in another country"
+      },
+      {
+        "key": "D",
+        "text": "Ask the brand to sign a waiver"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 13,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which launch-support request is most useful to negotiate with a brand?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "A general promise to 'help with marketing'"
+      },
+      {
+        "key": "B",
+        "text": "Exclusive use of its office address"
+      },
+      {
+        "key": "C",
+        "text": "Defined assets, training, budget or co-funding, and approval timelines"
+      },
+      {
+        "key": "D",
+        "text": "An unlimited right to change its products"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 14,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A forecast assumes 100 stores from month one, but only 15 have expressed interest. What should you do?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Present the 100-store forecast as guaranteed"
+      },
+      {
+        "key": "B",
+        "text": "Remove all sales from the forecast"
+      },
+      {
+        "key": "C",
+        "text": "Base the forecast on a staged rollout with explicit conversion and reorder assumptions"
+      },
+      {
+        "key": "D",
+        "text": "Use the brand's global sales growth rate ==== PAGE ==== International Brand Acquisition | Candidate assessment Page 3"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 15,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "The brand wants to keep selling directly to UAE customers online. Which point matters most for the agreement?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Whether the website uses the same font"
+      },
+      {
+        "key": "B",
+        "text": "How direct online sales, leads, pricing and customer service affect the exclusive rights"
+      },
+      {
+        "key": "C",
+        "text": "Whether the founder visits the UAE"
+      },
+      {
+        "key": "D",
+        "text": "The brand's office opening hours"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 16,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which item is most important to confirm before promising a launch date to retail partners?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "The brand's number of Instagram posts"
+      },
+      {
+        "key": "B",
+        "text": "The colour of the meeting room"
+      },
+      {
+        "key": "C",
+        "text": "The founder's travel plans"
+      },
+      {
+        "key": "D",
+        "text": "Production capacity, lead times, import readiness and available inventory"
+      }
+    ],
+    "correct": "D",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: D. "
+  },
+  {
+    "id": 17,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A deal offers AED 5 million projected sales but very low margin and high working-capital needs. What is the best assessment?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Accept because revenue is large"
+      },
+      {
+        "key": "B",
+        "text": "Assess gross profit, cash requirements and downside scenarios before deciding"
+      },
+      {
+        "key": "C",
+        "text": "Reject because all large deals are risky"
+      },
+      {
+        "key": "D",
+        "text": "Judge it only on the brand name"
+      }
+    ],
+    "correct": "B",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: B. "
+  },
+  {
+    "id": 18,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A high-potential brand declines UAE expansion this year. What is the best next step?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Remove it permanently from the pipeline"
+      },
+      {
+        "key": "B",
+        "text": "Contact its customers instead"
+      },
+      {
+        "key": "C",
+        "text": "Document the reason, agree on a suitable follow-up point and maintain the relationship"
+      },
+      {
+        "key": "D",
+        "text": "Send the same proposal every week"
+      }
+    ],
+    "correct": "C",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: C. "
+  },
+  {
+    "id": 19,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "A brand offers 'Middle East exclusivity' in an email. What should you clarify before treating the offer as secured?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Exact countries, rights, channels, products and whether existing commitments conflict"
+      },
+      {
+        "key": "B",
+        "text": "Only its intended advertising slogan"
+      },
+      {
+        "key": "C",
+        "text": "Only the brand's global headcount"
+      },
+      {
+        "key": "D",
+        "text": "Nothing; the phrase is sufficient"
+      }
+    ],
+    "correct": "A",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: A. "
+  },
+  {
+    "id": 20,
+    "type": "choice",
+    "sectionId": "A",
+    "sectionTitle": "Multiple choice",
+    "prompt": "Which outcome best measures success in this role?",
+    "context": "",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Number of cold emails sent"
+      },
+      {
+        "key": "B",
+        "text": "Number of brands mentioned in presentations"
+      },
+      {
+        "key": "C",
+        "text": "Number of meetings, regardless of quality"
+      },
+      {
+        "key": "D",
+        "text": "Signed, economically sound rights with a feasible UAE launch plan Section B - Written responses (40 points) Answer in a Google Forms paragraph field. Suggested length: 100-200 words per question. State assumptions where information is missing."
+      }
+    ],
+    "correct": "D",
+    "maxPoints": 3,
+    "modelAnswer": "Correct answer: D. "
+  },
+  {
+    "id": 21,
+    "type": "written",
+    "sectionId": "B",
+    "sectionTitle": "Written responses",
+    "prompt": "First 90 days You join with no existing brand pipeline. Outline your first 90 days to identify, qualify and approach international brands for UAE rights. Include milestones and how you would track progress.",
+    "context": "",
+    "choices": [],
+    "maxPoints": 8,
+    "modelAnswer": "21. First 90 days - 8 points 1. Defines target categories and a sourcing method (0-2 points) 2. Sets qualification criteria and prioritizes prospects (0-2 points) 3. Describes decision-maker outreach and follow-up (0-2 points) 4. Sets realistic milestones and pipeline measures (0-2 points)"
+  },
+  {
+    "id": 22,
+    "type": "written",
+    "sectionId": "B",
+    "sectionTitle": "Written responses",
+    "prompt": "Compare two opportunities Brand A has strong UAE demand signals but thin distributor margins and no capacity guarantee. Brand B has moderate demand signals, healthy margins and reliable supply. Explain what you would investigate next and how you would prioritize them.",
+    "context": "",
+    "choices": [],
+    "maxPoints": 8,
+    "modelAnswer": "22. Compare two opportunities - 8 points 1. Assesses demand evidence and commercial economics (0-2 points) 2. Investigates capacity and fulfilment risk (0-2 points) 3. Requests missing data or tests assumptions (0-2 points) 4. Gives a justified, conditional priority decision (0-2 points) ==== PAGE ===="
+  },
+  {
+    "id": 23,
+    "type": "written",
+    "sectionId": "B",
+    "sectionTitle": "Written responses",
+    "prompt": "Exclusivity term sheet List the key commercial terms you would seek in an exclusive UAE distribution or master franchise proposal. Explain any terms that would differ between the two models.",
+    "context": "",
+    "choices": [],
+    "maxPoints": 8,
+    "modelAnswer": "23. Exclusivity term sheet - 8 points 1. Defines territory, products or format, channels and term (0-2 points) 2. Covers targets, minimums and renewal or termination (0-2 points) 3. Covers pricing, supply, support and intellectual property (0-2 points) 4. Distinguishes distribution from franchise rights and obligations (0-2 points)"
+  },
+  {
+    "id": 24,
+    "type": "written",
+    "sectionId": "B",
+    "sectionTitle": "Written responses",
+    "prompt": "Negotiation scenario A brand requests a large upfront fee and five-year exclusivity. You have limited UAE demand data. Draft a short reply or negotiation approach that protects our company while keeping the brand engaged.",
+    "context": "",
+    "choices": [],
+    "maxPoints": 8,
+    "modelAnswer": "24. Negotiation scenario - 8 points 1. Acknowledges the brand's goals and keeps dialogue open (0-2 points) 2. Requests evidence and tests the economic case (0-2 points) 3. Proposes staged fees or a pilot with milestones (0-2 points) 4. Defines review, exit or performance protections (0-2 points)"
+  },
+  {
+    "id": 25,
+    "type": "written",
+    "sectionId": "B",
+    "sectionTitle": "Written responses",
+    "prompt": "Go / no-go recommendation A prospect offers exclusive UAE rights. Its product is well reviewed abroad, but UAE retail pricing would be 35% above local alternatives and registration timing is uncertain. Write a concise recommendation to management, including what you need to confirm before signing.",
+    "context": "",
+    "choices": [],
+    "maxPoints": 8,
+    "modelAnswer": "25. Go / no-go recommendation - 8 points 1. Identifies price-positioning and demand risk (0-2 points) 2. Identifies compliance and timing risk (0-2 points) 3. Proposes research, pilot or mitigations with decision gates (0-2 points) 4. Makes a clear conditional go / no-go recommendation (0-2 points) Multiple choice: ______ / 60 Written: ______ / 40 Total: ______ / 100 are screening guides, not automatic hiring decisions. the commercial results. Verify claims through references and deal examples."
+  }
+]

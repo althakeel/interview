@@ -1,0 +1,10 @@
+node_modules
+.next
+.env
+.env.local
+.env*.local
+data/local-db.json
+data/.atlas-skip
+data/.score-status.json
+data/.score-lock
+*.log
