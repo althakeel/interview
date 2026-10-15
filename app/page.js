@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { listRoles } from "@/lib/roles";
 import { Logo } from "@/components/Logo";
 
+function markFor(role) {
+  if (role.id === "gm") return "GM";
+  if (role.id === "brand") return "BA";
+  return String(role.short || role.title || "?").replace(/[^A-Za-z0-9]/g, "").slice(0, 2).toUpperCase() || "?";
+}
+
 export default function HomePage() {
   const [roles, setRoles] = useState(listRoles);
 
@@ -28,7 +34,7 @@ export default function HomePage() {
         <div className="role-grid">
           {roles.map((role) => (
             <a key={role.id} className="role-card" href={`/${role.id}`}>
-              <span className="brand-mark small">{role.id === "gm" ? "GM" : "BA"}</span>
+              <span className="brand-mark small">{markFor(role)}</span>
               <h2>{role.title}</h2>
               <p>{role.summary}</p>
               <strong>{role.minutes} minutes</strong>

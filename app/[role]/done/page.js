@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { formatWhen } from "@/lib/format";
 import { Logo } from "@/components/Logo";
+import { roleIdFromPath } from "@/lib/roles";
 
 export default function DonePage() {
   const router = useRouter();
   const pathname = usePathname();
-  const role = pathname.split("/").filter(Boolean)[0] === "brand" ? "brand" : "gm";
+  const role = roleIdFromPath(pathname);
   const home = `/${role}`;
   const examPath = `/${role}/exam`;
   const [candidate, setCandidate] = useState(null);

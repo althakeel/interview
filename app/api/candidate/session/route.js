@@ -3,7 +3,7 @@ import { clearCookie, cookiesNames, getCandidateSession } from "@/lib/auth";
 import { findCandidate, presentCandidate } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
 import { publicQuestion } from "@/lib/scheme";
-import { getRole } from "@/lib/roles";
+import { resolveRole } from "@/lib/catalog";
 import { durationMsFor } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +14,7 @@ export async function GET(request) {
   if (!session) return json({ candidate: null, role: requested }, 200);
 
   const exam = session.exam || "gm";
-  if (requested && getRole(requested) && requested !== exam) {
+  if (requested && (await resolveRole(requested)) && requested !== exam) {
     return json({ candidate: null, role: requested }, 200);
   }
 

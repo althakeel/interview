@@ -71,19 +71,19 @@ export default function ComparePage() {
     <AdminFrame
       title="Comparison"
       extra={(
-        <button className="copper no-print" type="button" onClick={gradePending} disabled={status.startsWith("Scoring") && status.endsWith("…")}>
-          {status.startsWith("Scoring") && status.endsWith("…") ? status : "Score submitted papers"}
+        <button className="studio-btn no-print" type="button" onClick={gradePending} disabled={status.startsWith("Scoring") && status.endsWith("…")}>
+          {status.startsWith("Scoring") && status.endsWith("…") ? status : "Score papers"}
         </button>
       )}
     >
       {error ? <p className="alert">{error}</p> : null}
-      {status && !status.endsWith("…") ? <p>{status}</p> : null}
-      <div className="chips" role="tablist" aria-label="Position">
+      {status && !status.endsWith("…") ? <p className="studio-note">{status}</p> : null}
+      <div className="studio-filters" role="tablist" aria-label="Position">
         {(data?.roles || []).map((role) => (
           <button
             key={role.id}
             type="button"
-            className={roleFilter === role.id ? "chip on" : "chip"}
+            className={roleFilter === role.id ? "on" : ""}
             onClick={() => setRoleFilter(role.id)}
           >
             {role.short}
@@ -92,38 +92,32 @@ export default function ComparePage() {
       </div>
 
       {leaders.length ? (
-        <section className="best-card">
+        <section className="studio-lead">
           <div>
-            <p className="kicker">Best result</p>
+            <p className="studio-kicker">Leading paper</p>
+            <p className="studio-mark">{oneDecimal(topMark)}</p>
+            <p>{leaders[0].rating}</p>
+          </div>
+          <div>
             <h2>{leaders.map((row) => row.name || "Candidate").join(", ")}</h2>
             <p>{leaders.map((row) => row.email).join(", ")}</p>
-            <p>
-              {oneDecimal(topMark)} / 100. {leaders[0].rating}
-            </p>
-            <a className="ghost" href={`/admin/candidate/${encodeURIComponent(leaders[0].email)}?role=${leaders[0].role}`}>Open answer sheet</a>
+            <a href={`/admin/candidate/${encodeURIComponent(leaders[0].email)}?role=${leaders[0].role}`}>Open answer sheet</a>
           </div>
-          <div>
+          <dl className="studio-sections">
             {sections.map((section) => (
-              <div key={section.id} style={{ marginBottom: 10 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
-                  <span>{section.title}</span>
-                  <span>{oneDecimal(section.points)} / {section.maxMarks}</span>
-                </div>
-                <div className="bar"><i style={{ width: `${Math.max(0, Math.min(100, section.percent))}%` }} /></div>
+              <div key={section.id}>
+                <dt>{section.title}</dt>
+                <dd>{oneDecimal(section.points)} / {section.maxMarks}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </section>
       ) : (
-        <section className="panel">
-          <h2>No marks yet</h2>
-          <p className="sub">When a candidate submits, OpenAI scores the paper automatically. This page refreshes on its own.</p>
-        </section>
+        <p className="studio-empty">No marks for this position yet.</p>
       )}
 
-      <section className="panel">
-        <div className="table-wrap">
-          <table>
+      <div className="ledger-wrap">
+          <table className="ledger">
             <thead>
               <tr>
                 <th>Rank</th>
@@ -144,9 +138,9 @@ export default function ComparePage() {
                     <a href={`/admin/candidate/${encodeURIComponent(row.email)}?role=${row.role}`}><strong>{row.name || "Not given"}</strong></a>
                     <div>{row.email}</div>
                   </td>
-                  <td>
-                    {row.finalMark === null ? "Not scored" : (
-                      <span className={`pill ${tone(row.finalMark)}`}>{oneDecimal(row.finalMark)}%</span>
+                  <td className="ledger-mark">
+                    {row.finalMark === null ? "—" : (
+                      <strong className={tone(row.finalMark)}>{oneDecimal(row.finalMark)}</strong>
                     )}
                   </td>
                   <td>{row.rating || "Awaiting score"}</td>
@@ -163,8 +157,7 @@ export default function ComparePage() {
               ))}
             </tbody>
           </table>
-        </div>
-      </section>
+      </div>
     </AdminFrame>
   );
 }

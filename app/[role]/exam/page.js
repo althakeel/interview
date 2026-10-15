@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { answerText, formatDuration } from "@/lib/format";
 import { Logo } from "@/components/Logo";
+import { roleIdFromPath } from "@/lib/roles";
 
 const SHORT_SECTIONS = {
   A: "Leadership",
@@ -19,7 +20,7 @@ const SHORT_SECTIONS = {
 export default function ExamPage() {
   const router = useRouter();
   const pathname = usePathname();
-  const role = pathname.split("/").filter(Boolean)[0] === "brand" ? "brand" : "gm";
+  const role = roleIdFromPath(pathname);
   const home = `/${role}`;
   const donePath = `/${role}/done`;
   const [pack, setPack] = useState(null);
@@ -29,11 +30,13 @@ export default function ExamPage() {
   const [saveLabel, setSaveLabel] = useState("Saved");
   const [error, setError] = useState("");
   const [confirming, setConfirming] = useState(false);
+  const [timeNotice, setTimeNotice] = useState(false);
   const answersRef = useRef({});
   const offsetRef = useRef(0);
   const queue = useRef({ running: false, pending: false });
   const locked = useRef(false);
   const debounceRef = useRef(null);
+  const tenMinuteNotice = useRef(false);
 
   useEffect(() => {
     let ignore = false;
@@ -128,6 +131,13 @@ export default function ExamPage() {
   }, [pack]);
 
   useEffect(() => {
+    if (tenMinuteNotice.current || remaining === null || remaining <= 0 || remaining > 10 * 60 * 1000) return;
+    tenMinuteNotice.current = true;
+    setTimeNotice(true);
+    window.setTimeout(() => setTimeNotice(false), 5000);
+  }, [remaining]);
+
+  useEffect(() => {
     const onLeave = (event) => {
       if (locked.current) return;
       event.preventDefault();
@@ -187,6 +197,9 @@ export default function ExamPage() {
 
   return (
     <div className="exam-shell">
+      {timeNotice ? (
+        <p className="time-toast" role="status">Only 10 minutes left.</p>
+      ) : null}
       <header className="exam-top">
         <div className="exam-brand">
           <Logo className="compact" />

@@ -98,16 +98,20 @@ export function CandidateGate({ role }) {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
   const clock = `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}:00`;
-  const outline = role.id === "gm"
-    ? MARK_SCHEME.map((section) => ({
-        id: section.id,
-        title: section.title,
-        count: `${section.questionIds.length} questions`,
-      }))
-    : [
-        { id: "A", title: "Multiple choice", count: "20 questions" },
-        { id: "B", title: "Written responses", count: "5 questions" },
-      ];
+  const outline = role.sections?.length
+    ? role.sections
+    : role.id === "gm"
+      ? MARK_SCHEME.map((section) => ({
+          id: section.id,
+          title: section.title,
+          count: `${section.questionIds.length} questions`,
+        }))
+      : role.id === "brand"
+        ? [
+            { id: "A", title: "Multiple choice", count: "20 questions" },
+            { id: "B", title: "Written responses", count: "5 questions" },
+          ]
+        : [];
 
   return (
     <main className="split">

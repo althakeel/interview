@@ -7,9 +7,10 @@ import { Logo } from "@/components/Logo";
 const LINKS = [
   { href: "/admin/dashboard", label: "Candidates" },
   { href: "/admin/compare", label: "Comparison" },
+  { href: "/admin/tasks", label: "Tasks" },
 ];
 
-export function AdminFrame({ title, extra, children }) {
+export function AdminFrame({ title, note, extra, children }) {
   const router = useRouter();
   const pathname = usePathname();
   const [scoring, setScoring] = useState(null);
@@ -45,34 +46,32 @@ export function AdminFrame({ title, extra, children }) {
       : "Waiting for submitted papers";
 
   return (
-    <div className="panel-shell">
+    <div className="panel-shell studio">
       <aside className="panel-side">
         <a className="side-brand" href="/admin/dashboard">
           <Logo />
           <small>Interview panel</small>
         </a>
         <nav className="side-nav">
-          {LINKS.map((link) => (
+          {LINKS.map((link, index) => (
             <a key={link.href} className={pathname === link.href ? "side-link active" : "side-link"} href={link.href}>
+              <em>{String(index + 1).padStart(2, "0")}</em>
               {link.label}
             </a>
           ))}
         </nav>
-        <div className="side-score">
-          <p>Auto scoring</p>
-          <strong>{scoringText}</strong>
-          <span>OpenAI checks about once a minute</span>
-        </div>
+        <p className="side-score-line">{scoringText}</p>
         <button className="side-logout" type="button" onClick={logout}>Log out</button>
       </aside>
       <div className="panel-content">
-        <div className="page-head">
-          <div>
+        <header className="studio-mast">
+          <p className="studio-kicker">Althakeel</p>
+          <div className="studio-mast-row">
             <h1>{title}</h1>
-            <p className="page-note">Submitted papers are scored automatically.</p>
+            {extra}
           </div>
-          {extra}
-        </div>
+          {note ? <p className="studio-note">{note}</p> : null}
+        </header>
         {children}
       </div>
     </div>

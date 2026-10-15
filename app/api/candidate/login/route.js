@@ -13,14 +13,14 @@ import {
   presentCandidate,
 } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
-import { getRole } from "@/lib/roles";
+import { resolveRole } from "@/lib/catalog";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const role = getRole(body.role)?.id;
+    const role = (await resolveRole(body.role))?.id;
     const email = normalizeEmail(body.email);
     const name = normalizeName(body.name);
     if (!role) return bad("Choose a position.");

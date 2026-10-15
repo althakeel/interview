@@ -4,7 +4,7 @@ import { candidatesCollection, presentCandidate } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
 import { storageMode } from "@/lib/mongodb";
 import { readScoreStatus } from "@/lib/autoscore";
-import { listRoles } from "@/lib/roles";
+import { listAllRoles } from "@/lib/catalog";
 import { getExamMinutes } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +13,7 @@ export async function GET() {
   const session = await getAdminSession();
   if (!session) return bad("Admin sign-in required.", 401);
 
-  const roles = listRoles();
+  const roles = await listAllRoles();
   const minutes = await getExamMinutes();
   const [candidates, banks] = await Promise.all([
     candidatesCollection().then((collection) =>
@@ -26,6 +26,7 @@ export async function GET() {
         title: role.title,
         short: role.short,
         minutes: minutes[role.id] || role.minutes,
+        summary: role.summary || "",
         questionCount: bank.questions.length,
         keySource: bank.source,
         keyUpdatedAt: bank.updatedAt,

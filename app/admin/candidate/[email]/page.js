@@ -84,60 +84,53 @@ function CandidateSheet() {
       {!data ? <p>Loading the answer sheet…</p> : null}
       {data ? (
         <>
-          <section className="best-card">
+          <section className="studio-lead">
             <div>
-              <p className="kicker">{data.candidate.status}</p>
-              <div className="identity light">
-                <p><span>Name</span> {data.candidate.name || "Not given"}</p>
-                <p><span>Email</span> {data.candidate.email}</p>
-                <p><span>Position</span> {data.candidate.roleTitle}</p>
-              </div>
-              <p className="mark">
-                {scores ? oneDecimal(scores.finalMark) : "–"}
-                <small> / 100</small>
-              </p>
+              <p className="studio-kicker">{data.candidate.status === "Graded" ? "Scored" : data.candidate.status}</p>
+              <p className="studio-mark">{scores ? oneDecimal(scores.finalMark) : "–"}</p>
               <p>{scoreNote(data.candidate, scores)}</p>
-              <p>
-                Registered {formatWhen(data.candidate.lastLoginAt)}
-                {data.candidate.submittedAt ? ` · Submitted ${formatWhen(data.candidate.submittedAt)}` : ""}
-              </p>
-              <button className="score-check no-print" type="button" onClick={grade} disabled={scoring}>
-                {scoring ? "Checking score…" : "Check score"}
+              <button className="studio-btn no-print" type="button" onClick={grade} disabled={scoring}>
+                {scoring ? "Checking…" : "Check score"}
               </button>
             </div>
             <div>
+              <h2>{data.candidate.name || "Name not given"}</h2>
+              <p>{data.candidate.email}</p>
+              <p>{data.candidate.roleTitle}</p>
+              <p className="studio-note">
+                Registered {formatWhen(data.candidate.lastLoginAt)}
+                {data.candidate.submittedAt ? ` · Submitted ${formatWhen(data.candidate.submittedAt)}` : ""}
+              </p>
+            </div>
+            <dl className="studio-sections">
               {(scores?.sections || []).map((section) => (
-                <div key={section.id} style={{ marginBottom: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
-                    <span>{section.title}</span>
-                    <span>{oneDecimal(section.percent)}%</span>
-                  </div>
-                  <div className="bar"><i style={{ width: `${Math.max(0, Math.min(100, section.percent))}%` }} /></div>
+                <div key={section.id}>
+                  <dt>{section.title}</dt>
+                  <dd>{oneDecimal(section.percent)}%</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </section>
 
           {groups.map((group) => (
-            <section key={group.title} className="panel sheet-block">
+            <section key={group.title} className="studio-group">
               <h2>{group.title}</h2>
               {group.rows.map((row) => (
-                <article key={row.id} style={{ padding: "14px 0", borderTop: "1px solid var(--line)" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "start" }}>
-                    <strong>
-                      {row.id === 41 ? "Leadership" : row.id}. {row.prompt}
-                    </strong>
-                    <span className={`pill ${tone(row.percent)}`}>
-                      {row.percent === null ? "Not scored" : `${row.percent}% · ${oneDecimal(row.points)}/${oneDecimal(row.maxPoints)}`}
-                    </span>
+                <article key={row.id} className="studio-q">
+                  <div className="studio-no">{row.id === 41 ? "L" : String(row.id).padStart(2, "0")}</div>
+                  <div>
+                    <h3>{row.prompt}</h3>
+                    {row.context ? <pre className="context-block">{row.context}</pre> : null}
+                    <p className="answer-read">{row.answer.trim() ? row.answer : "No answer."}</p>
+                    {row.feedback ? <p className="studio-note">{row.feedback}</p> : null}
+                    <details>
+                      <summary>Model answer</summary>
+                      <pre className="model-read">{row.modelAnswer}</pre>
+                    </details>
                   </div>
-                  {row.context ? <pre className="context-block">{row.context}</pre> : null}
-                  <p className="answer-read">{row.answer.trim() ? row.answer : "No answer."}</p>
-                  {row.feedback ? <p className="sub">{row.feedback}</p> : null}
-                  <details>
-                    <summary>Model answer</summary>
-                    <pre className="model-read">{row.modelAnswer}</pre>
-                  </details>
+                  <p className={`studio-score ${tone(row.percent)}`}>
+                    {row.percent === null ? "—" : `${oneDecimal(row.points)}/${oneDecimal(row.maxPoints)}`}
+                  </p>
                 </article>
               ))}
             </section>

@@ -1,18 +1,19 @@
 import { json } from "@/lib/http";
-import { listRoles } from "@/lib/roles";
+import { listAllRoles } from "@/lib/catalog";
 import { getExamMinutes } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const minutes = await getExamMinutes();
+  const [roles, minutes] = await Promise.all([listAllRoles(), getExamMinutes()]);
   return json({
-    roles: listRoles().map((role) => ({
+    roles: roles.map((role) => ({
       id: role.id,
       title: role.title,
       short: role.short,
       summary: role.summary,
       minutes: minutes[role.id] || role.minutes,
+      sections: role.sections || [],
     })),
   });
 }
