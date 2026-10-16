@@ -104,11 +104,11 @@ export function CandidateGate({ role }) {
       ? MARK_SCHEME.map((section) => ({
           id: section.id,
           title: section.title,
-          count: `${section.questionIds.length} questions`,
+          count: `${section.questionIds.length} question${section.questionIds.length === 1 ? "" : "s"}`,
         }))
       : role.id === "brand"
         ? [
-            { id: "A", title: "Multiple choice", count: "20 questions" },
+            { id: "A", title: "Multiple choice", count: "5 questions" },
             { id: "B", title: "Written responses", count: "5 questions" },
           ]
         : [];
@@ -127,7 +127,7 @@ export function CandidateGate({ role }) {
               <span>Countdown</span>
             </div>
             <div className="fact">
-              <strong>{session.questionCount || (role.id === "gm" ? 41 : 25)}</strong>
+              <strong>{session.questionCount || (role.id === "gm" || role.id === "brand" ? 10 : 0)}</strong>
               <span>Questions</span>
             </div>
             <div className="fact">

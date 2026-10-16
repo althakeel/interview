@@ -19,6 +19,8 @@ export async function POST(request) {
     const result = await scoreOne(email, { force: true, role });
     return json(result);
   } catch (error) {
-    return bad(error.message || "Scoring failed.", 500);
+    const message = error.message || "Scoring failed.";
+    const status = /No answers|not started|No candidate|Choose a candidate/.test(message) ? 400 : 500;
+    return bad(message, status);
   }
 }

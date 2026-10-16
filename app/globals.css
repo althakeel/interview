@@ -942,6 +942,17 @@ select {
   color: #5c564f;
   padding: 12px 8px;
 }
+.time-add {
+  background: #eef3ef;
+  color: #2f5d45;
+  border: 1px solid #c9ddd0;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.time-add:hover { background: #e3efe6; }
 .studio-time input:focus,
 .studio-form input:focus,
 .studio-form select:focus {

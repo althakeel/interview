@@ -18,6 +18,7 @@ export default function DashboardPage() {
   const [uploading, setUploading] = useState(false);
   const [times, setTimes] = useState({});
   const [savingTime, setSavingTime] = useState(false);
+  const [addingTime, setAddingTime] = useState("");
   const [editingTime, setEditingTime] = useState(false);
 
   async function load() {
@@ -101,6 +102,28 @@ export default function DashboardPage() {
       setError(err.message);
     } finally {
       setSavingTime(false);
+    }
+  }
+
+  async function addTime(row) {
+    const key = `${row.role}:${row.email}`;
+    setAddingTime(key);
+    setError("");
+    setNotice("");
+    try {
+      const response = await fetch("/api/admin/extra-time", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: row.email, role: row.role, minutes: 5 }),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error || "Could not add time.");
+      setNotice(`${row.name || row.email} has 5 more minutes.`);
+      await load();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setAddingTime("");
     }
   }
 
@@ -229,6 +252,7 @@ export default function DashboardPage() {
               <th>Status</th>
               <th>Paper</th>
               <th>Mark</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -260,6 +284,18 @@ export default function DashboardPage() {
                     {row.finalMark === null ? "—" : (
                       <strong className={tone(row.finalMark)}>{oneDecimal(row.finalMark)}</strong>
                     )}
+                  </td>
+                  <td>
+                    {row.startedAt && !row.submittedAt ? (
+                      <button
+                        className="time-add"
+                        type="button"
+                        onClick={() => addTime(row)}
+                        disabled={addingTime === `${row.role}:${row.email}`}
+                      >
+                        {addingTime === `${row.role}:${row.email}` ? "Adding…" : "Add 5 min"}
+                      </button>
+                    ) : null}
                   </td>
                 </tr>
               );

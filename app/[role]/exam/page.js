@@ -114,8 +114,22 @@ export default function ExamPage() {
     }
   }
 
-  const submitRef = useRef(submit);
-  submitRef.current = submit;
+  useEffect(() => {
+    const id = setInterval(async () => {
+      const data = await fetch(`/api/candidate/session?role=${role}`).then((response) => response.json()).catch(() => null);
+      if (!data?.durationMs || data.candidate?.submittedAt) return;
+      setPack((current) => {
+        if (!current?.candidate?.startedAt) return current;
+        if (current.durationMs === data.durationMs && current.candidate.startedAt === data.candidate.startedAt) return current;
+        return {
+          ...current,
+          durationMs: data.durationMs,
+          candidate: { ...current.candidate, startedAt: data.candidate.startedAt },
+        };
+      });
+    }, 8000);
+    return () => clearInterval(id);
+  }, [role]);
 
   useEffect(() => {
     if (!pack?.candidate?.startedAt) return undefined;
@@ -123,7 +137,6 @@ export default function ExamPage() {
       const end = new Date(pack.candidate.startedAt).getTime() + pack.durationMs;
       const left = end - (Date.now() + offsetRef.current);
       setRemaining(left);
-      if (left <= 0) submitRef.current();
     };
     tick();
     const id = setInterval(tick, 250);
@@ -251,7 +264,7 @@ export default function ExamPage() {
                       position === index ? "current" : "",
                       filled ? "done" : "",
                     ].filter(Boolean).join(" ");
-                    const label = question.id === 41 ? "Final" : String(question.id);
+                    const label = String(position + 1);
                     return (
                       <button
                         key={question.id}
@@ -261,7 +274,7 @@ export default function ExamPage() {
                         title={`${group.title}, question ${label}${filled ? ", answered" : ", not answered yet"}`}
                         onClick={() => goTo(position)}
                       >
-                        {question.id === 41 ? "L" : question.id}
+                        {position + 1}
                       </button>
                     );
                   })}

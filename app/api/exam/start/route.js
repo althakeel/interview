@@ -1,9 +1,8 @@
 import { json, bad } from "@/lib/http";
 import { getCandidateSession } from "@/lib/auth";
-import { candidateFilter, candidatesCollection, findCandidate, presentCandidate } from "@/lib/candidates";
+import { candidateDurationMs, candidateFilter, candidatesCollection, findCandidate, presentCandidate } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
 import { publicQuestion } from "@/lib/scheme";
-import { durationMsFor } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +25,7 @@ export async function POST() {
   return json({
     candidate: await presentCandidate(candidate),
     serverNow: Date.now(),
-    durationMs: await durationMsFor(exam),
+    durationMs: await candidateDurationMs(candidate),
     questions: bank.questions.map(publicQuestion),
     answers: candidate.answers || {},
   });

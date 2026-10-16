@@ -16,10 +16,8 @@ export default function CandidateSheetPage() {
 function scoreNote(candidate, scores) {
   if (scores?.rating) return scores.rating;
   if (!candidate?.startedAt) return "This candidate has not started the exam.";
-  if (!candidate.answered && !candidate.submittedAt) {
-    return "No answers have been saved yet, so OpenAI has nothing to score.";
-  }
-  if (!candidate.submittedAt) return "OpenAI checks saved answers about once a minute.";
+  if (!candidate.answered) return "No answers have been saved yet, so there is nothing to score.";
+  if (!candidate.submittedAt) return "Saved answers are scored about once a minute. The paper stays In exam until they press Finish.";
   return "Submitted. OpenAI is scoring this paper.";
 }
 
@@ -60,11 +58,11 @@ function CandidateSheet() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, role }),
       });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || "Scoring failed");
       await load();
     } catch (err) {
-      setError(err.message);
+      setError(err.message === "Failed to fetch" ? "Scoring could not reach the server. Refresh and try Check score again." : err.message);
     } finally {
       setScoring(false);
     }
@@ -86,7 +84,7 @@ function CandidateSheet() {
         <>
           <section className="studio-lead">
             <div>
-              <p className="studio-kicker">{data.candidate.status === "Graded" ? "Scored" : data.candidate.status}</p>
+              <p className="studio-kicker">{data.candidate.submittedAt ? (data.candidate.status === "Graded" ? "Done" : "Submitted") : "In exam"}</p>
               <p className="studio-mark">{scores ? oneDecimal(scores.finalMark) : "–"}</p>
               <p>{scoreNote(data.candidate, scores)}</p>
               <button className="studio-btn no-print" type="button" onClick={grade} disabled={scoring}>

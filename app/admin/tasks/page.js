@@ -19,6 +19,7 @@ export default function TasksPage() {
   const [now, setNow] = useState(Date.now());
   const [offset, setOffset] = useState(0);
   const [ready, setReady] = useState(false);
+  const [storage, setStorage] = useState("");
 
   async function load() {
     const response = await fetch("/api/admin/overview");
@@ -34,6 +35,7 @@ export default function TasksPage() {
     setOffset(body.serverNow - Date.now());
     setRoles(body.roles || []);
     setPeople(body.candidates || []);
+    setStorage(body.storage || "");
     setReady(true);
     return body.roles || [];
   }
@@ -118,6 +120,11 @@ export default function TasksPage() {
 
   return (
     <AdminFrame title="Tasks" note="Live exams, papers still waiting, and finished scores. This refreshes on its own.">
+      {storage === "local" ? (
+        <p className="notice">
+          This computer is using its own empty copy of the papers, so live exams from the server do not appear here.
+        </p>
+      ) : null}
       {error ? <p className="alert">{error}</p> : null}
       {notice ? <p className="notice">{notice}</p> : null}
 

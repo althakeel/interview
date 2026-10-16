@@ -572,7 +572,7 @@
       },
       {
         "key": "D",
-        "text": "Signed, economically sound rights with a feasible UAE launch plan Section B - Written responses (40 points) Answer in a Google Forms paragraph field. Suggested length: 100-200 words per question. State assumptions where information is missing."
+        "text": "Signed, economically sound rights with a feasible UAE launch plan"
       }
     ],
     "correct": "D",
@@ -584,7 +584,7 @@
     "type": "written",
     "sectionId": "B",
     "sectionTitle": "Written responses",
-    "prompt": "First 90 days You join with no existing brand pipeline. Outline your first 90 days to identify, qualify and approach international brands for UAE rights. Include milestones and how you would track progress.",
+    "prompt": "You join with no existing brand pipeline. Outline your first 90 days to identify, qualify and approach international brands for UAE rights. Include milestones and how you would track progress.",
     "context": "",
     "choices": [],
     "maxPoints": 8,
@@ -595,18 +595,18 @@
     "type": "written",
     "sectionId": "B",
     "sectionTitle": "Written responses",
-    "prompt": "Compare two opportunities Brand A has strong UAE demand signals but thin distributor margins and no capacity guarantee. Brand B has moderate demand signals, healthy margins and reliable supply. Explain what you would investigate next and how you would prioritize them.",
+    "prompt": "Brand A has strong UAE demand signals but thin distributor margins and no capacity guarantee. Brand B has moderate demand signals, healthy margins and reliable supply. Explain what you would investigate next and how you would prioritize them.",
     "context": "",
     "choices": [],
     "maxPoints": 8,
-    "modelAnswer": "22. Compare two opportunities - 8 points 1. Assesses demand evidence and commercial economics (0-2 points) 2. Investigates capacity and fulfilment risk (0-2 points) 3. Requests missing data or tests assumptions (0-2 points) 4. Gives a justified, conditional priority decision (0-2 points) ==== PAGE ===="
+    "modelAnswer": "22. Compare two opportunities - 8 points 1. Assesses demand evidence and commercial economics (0-2 points) 2. Investigates capacity and fulfilment risk (0-2 points) 3. Requests missing data or tests assumptions (0-2 points) 4. Gives a justified, conditional priority decision (0-2 points)"
   },
   {
     "id": 23,
     "type": "written",
     "sectionId": "B",
     "sectionTitle": "Written responses",
-    "prompt": "Exclusivity term sheet List the key commercial terms you would seek in an exclusive UAE distribution or master franchise proposal. Explain any terms that would differ between the two models.",
+    "prompt": "List the key commercial terms you would seek in an exclusive UAE distribution or master franchise proposal. Explain any terms that would differ between the two models.",
     "context": "",
     "choices": [],
     "maxPoints": 8,
@@ -617,7 +617,7 @@
     "type": "written",
     "sectionId": "B",
     "sectionTitle": "Written responses",
-    "prompt": "Negotiation scenario A brand requests a large upfront fee and five-year exclusivity. You have limited UAE demand data. Draft a short reply or negotiation approach that protects our company while keeping the brand engaged.",
+    "prompt": "A brand requests a large upfront fee and five-year exclusivity. You have limited UAE demand data. Draft a short reply or negotiation approach that protects our company while keeping the brand engaged.",
     "context": "",
     "choices": [],
     "maxPoints": 8,
@@ -628,10 +628,10 @@
     "type": "written",
     "sectionId": "B",
     "sectionTitle": "Written responses",
-    "prompt": "Go / no-go recommendation A prospect offers exclusive UAE rights. Its product is well reviewed abroad, but UAE retail pricing would be 35% above local alternatives and registration timing is uncertain. Write a concise recommendation to management, including what you need to confirm before signing.",
+    "prompt": "A prospect offers exclusive UAE rights. Its product is well reviewed abroad, but UAE retail pricing would be 35% above local alternatives and registration timing is uncertain. Write a concise recommendation to management, including what you need to confirm before signing.",
     "context": "",
     "choices": [],
     "maxPoints": 8,
-    "modelAnswer": "25. Go / no-go recommendation - 8 points 1. Identifies price-positioning and demand risk (0-2 points) 2. Identifies compliance and timing risk (0-2 points) 3. Proposes research, pilot or mitigations with decision gates (0-2 points) 4. Makes a clear conditional go / no-go recommendation (0-2 points) Multiple choice: ______ / 60 Written: ______ / 40 Total: ______ / 100 are screening guides, not automatic hiring decisions. the commercial results. Verify claims through references and deal examples."
+    "modelAnswer": "25. Go / no-go recommendation - 8 points 1. Identifies price-positioning and demand risk (0-2 points) 2. Identifies compliance and timing risk (0-2 points) 3. Proposes research, pilot or mitigations with decision gates (0-2 points) 4. Makes a clear conditional go / no-go recommendation (0-2 points)"
   }
 ]

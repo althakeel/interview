@@ -1,10 +1,9 @@
 import { json } from "@/lib/http";
 import { clearCookie, cookiesNames, getCandidateSession } from "@/lib/auth";
-import { findCandidate, presentCandidate } from "@/lib/candidates";
+import { candidateDurationMs, findCandidate, presentCandidate } from "@/lib/candidates";
 import { ensureQuestionBank } from "@/lib/bank";
 import { publicQuestion } from "@/lib/scheme";
 import { resolveRole } from "@/lib/catalog";
-import { durationMsFor } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +25,7 @@ export async function GET(request) {
   return json({
     candidate: await presentCandidate(candidate),
     serverNow: Date.now(),
-    durationMs: await durationMsFor(exam),
+    durationMs: await candidateDurationMs(candidate),
     questionCount: bank.questions.length,
     questions: inProgress ? bank.questions.map(publicQuestion) : [],
     answers: inProgress ? candidate.answers || {} : {},
